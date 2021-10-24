@@ -6,11 +6,10 @@ import {postData} from "../../utils";
 import {useSetRecoilState, useRecoilValue} from "recoil";
 import {loggedInAtom, sessionIdAtom} from "../../atoms";
 
-function Login() {
+function Login(props) {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
 
-    const setLoggedIn = useSetRecoilState(loggedInAtom);
     const sessionId = useRecoilValue(sessionIdAtom);
 
     const handleSubmit = async (e) => {
@@ -25,7 +24,10 @@ function Login() {
         });
 
         if (response.valid) {
-            setLoggedIn(true);
+            props.setCurLoc({
+                lat: response.loc.lat,
+                lng: response.loc.lng
+            })
         } else {
             window.location.href = "/";
         }

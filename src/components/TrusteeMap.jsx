@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import GoogleMapReact from 'google-map-react';
-import {prevLocationsAtom, sessionIdAtom} from "../atoms";
 import {BsDot, RiMapPinUserFill} from "react-icons/all";
 
 const Marker = ({text}) => <RiMapPinUserFill size={"30px"} color={"red"}>{text}</RiMapPinUserFill>;
 const PreviousMarker = ({text}) => <BsDot size={"30px"} color={"red"}>{text}</BsDot>;
+
 
 function TrusteeMap(props) {
 
@@ -19,10 +19,17 @@ function TrusteeMap(props) {
         zoom: 14
     };
 
-    // let [curLat, setCurLat] = useState(defaultProps.center.lat);
-    // let [curLng, setCurLng] = useState(defaultProps.center.lng);
+    let [curLat, setCurLat] = useState(null);
+    let [curLng, setCurLng] = useState(null);
 
-    // let sessionId = useRecoilValue(sessionIdAtom);
+    useEffect(() => {
+        if (props.loc == null){
+            setCurLat(null);
+            setCurLng(null);
+        }else{
+        setCurLat(props.loc.lat);
+        setCurLng(props.loc.lng);}
+    }, []);
 
     return <div style={{height: '100vh', width: '100%'}}>
 
@@ -31,12 +38,15 @@ function TrusteeMap(props) {
             defaultCenter={defaultProps.center}
             defaultZoom={defaultProps.zoom}
         >
+            {curLng != null && curLat ?
+                <Marker
+                    lat={curLat}
+                    lng={curLng}
+                    text="My Marker"
+                /> : <></>
+            }
 
-            <Marker
-                lat={defaultProps.center.lat}
-                lng={defaultProps.center.lng}
-                text="My Marker"
-            />
+
 
         </GoogleMapReact>
     </div>;

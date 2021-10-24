@@ -5,7 +5,7 @@ import {BsDot, RiMapPinUserFill} from "react-icons/all";
 
 import {useRecoilState, useRecoilValue} from "recoil";
 
-const Marker = ({text}) => <RiMapPinUserFill size={"30px"} color={"red"}>{text}</RiMapPinUserFill>;
+const Marker = ({text}) => <RiMapPinUserFill size={"40px"} color={"red"}>{text}</RiMapPinUserFill>;
 const PreviousMarker = ({text}) => <BsDot size={"30px"} color={"red"}>{text}</BsDot>;
 
 async function updateLocation(setCurLat, setCurLng) {
@@ -15,7 +15,7 @@ async function updateLocation(setCurLat, setCurLng) {
     });
 }
 
-function SimpleMap(props) {
+function SimpleMap() {
 
     const DEFAULT_LAT = 37.8778072;
     const DEFAULT_LNG = -122.2672373;
@@ -36,8 +36,6 @@ function SimpleMap(props) {
 
     const socket = useRecoilValue(socketAtom)
 
-    console.log(`socket: ${socket}`);
-
     useEffect(()=>{
         setPrevLocations([
             {
@@ -48,16 +46,16 @@ function SimpleMap(props) {
         ]);
     },[curLat, curLng])
 
-    // if (socket) {
-    if (true){
-        const interval = setInterval(async function() {
-            console.log(curLat, curLng)
-            await updateLocation(setCurLat, setCurLng)
-            console.log(curLat, curLng)
-            console.log()
-            // socket.emit("update location", {"newLat" : curLat, "newLng" : curLng})
-        }, 5000);
-    }
+    // // if (socket) {
+    // if (socket){
+    //     const interval = setInterval(async function() {
+    //         console.log(curLat, curLng)
+    //         await updateLocation(setCurLat, setCurLng)
+    //         console.log(curLat, curLng)
+    //         console.log()
+    //         // socket.emit("update location", {"newLat" : curLat, "newLng" : curLng})
+    //     }, 5000);
+    // }
 
     return <div style={{height: sessionId!==""?'93.5vh':'100vh', width: '100%'}}>
 
@@ -72,10 +70,6 @@ function SimpleMap(props) {
                 lng={defaultProps.center.lng}
                 text="My Marker"
             />
-
-            {prevLocations.map((locObj) => {
-                return <PreviousMarker lat={locObj.lat} lng={locObj.lng} text="My Marker"/>
-            })}
 
             {sessionId !== "" ? <>
 
