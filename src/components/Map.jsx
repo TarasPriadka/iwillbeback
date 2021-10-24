@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import {RiMapPinUserFill} from "react-icons/all";
 import {Button} from "react-bootstrap";
 
-function SimpleMap() {
+function SimpleMap(props) {
 
     let defaultProps = {
         center: {
@@ -19,11 +19,10 @@ function SimpleMap() {
     let [curLat, setCurLat] = useState(defaultProps.center.lat);
     let [curLng, setCurLng] = useState(defaultProps.center.lng);
 
-
     return <div style={{height: '100vh', width: '100%'}}>
 
         <GoogleMapReact
-            bootstrapURLKeys={{key: "AIzaSyAf8lOae3cOw78dgDZs5el_1sxSyDN1Mfc"}}
+            bootstrapURLKeys={{key: process.env.REACT_APP_MAPS_API}}
             defaultCenter={defaultProps.center}
             defaultZoom={defaultProps.zoom}
         >
