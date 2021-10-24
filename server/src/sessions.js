@@ -1,0 +1,3 @@
+sessions = {}
+
+module.exports = {sessions}

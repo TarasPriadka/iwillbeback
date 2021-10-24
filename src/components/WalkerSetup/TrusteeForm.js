@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import "../../App.css";
-import {Button, Form} from "react-bootstrap";
 import {goingOutAtom, loggedInAtom, socketAtom, sessionIdAtom} from "../../atoms";
+import {Button, Form, Dropdown} from "react-bootstrap";
 import {postData} from "../../utils";
 
 import {useRecoilState, useSetRecoilState} from "recoil";
 import { useHistory } from 'react-router-dom';
-import { io } from 'socket.io-client'
+import { io } from 'socket.io-client';
 
 function TrusteeForm() {
     const setLoggedIn = useSetRecoilState(loggedInAtom);
@@ -49,9 +49,10 @@ function TrusteeForm() {
 
         setSessionId(resp.sessionId);
         setLoggedIn(true);
-        setSocket(io());
+        console.log("updating socket")
+        const socket = io()
+        setSocket(socket);
         history.push(`/walking/${resp.sessionId}`);
-
     }
 
     return <div className="trust-form m-2 p-3">
