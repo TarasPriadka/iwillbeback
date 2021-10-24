@@ -19,6 +19,7 @@
     "pg": "^8.5.1",
     "prettier": "^2.2.1",
     "set-cookie-parser": "^2.4.8",
+    "shortid": "^2.2.16",
     "socket.io": "^4.3.1"
   },
   "devDependencies": {
