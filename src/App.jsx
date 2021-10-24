@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch,} from "react-router-dom";
 import WalkerSetupScreen from "./screens/WalkerSetupScreen";
-import AppNavbar from "./components/WalkerSetup/AppNavbar";
+import AppNavbar from "./components/AppNavbar";
 import WalkingScreen from "./screens/WalkingScreen";
 
 export default function App() {
