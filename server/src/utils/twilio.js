@@ -24,11 +24,18 @@ function send_start_message(trustee_phone, walker_name, walker_action, walker_et
     )
 }
 
-function send_template_message(trustee_phone, walker_name, url) {
+function send_help_message(trustee_phone, walker_name, url) {
    send_message(
         trustee_phone,
         `I'll Be Back Alert: ${walker_name} may be in trouble. Please go to this link: ${url}`
     )
 }
 
-module.exports = {send_message, send_start_message, send_template_message}
+function send_end_message(trustee_phone, walker_name) {
+    send_message(
+        trustee_phone,
+        `I'll Be Back Alert: ${walker_name} may be in trouble.`
+    )
+}
+
+module.exports = {send_message, send_start_message, send_help_message, send_end_message}
