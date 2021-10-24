@@ -7,7 +7,7 @@ import {loggedInAtom} from "../atoms";
 import Login from "../components/Walking/Login";
 import {useRecoilValue} from "recoil";
 import SimpleMap from "../components/Map";
-import AppNavbar from "../components/WalkerSetup/AppNavbar";
+import AppNavbar from "../components/AppNavbar";
 import {Button, ButtonGroup} from "react-bootstrap";
 import {postData} from "../utils";
 
@@ -15,13 +15,13 @@ function WalkingScreen() {
     const id = useParams();
     const loggedIn = useRecoilValue(loggedInAtom);
 
-    // const handleDanger = () => {
-    //     postData("/api/danger", {})
-    // }
-    //
-    // const handleEnd = () => {
-    //     postData("/api/end", {})
-    // }
+    const handleDanger = () => {
+        // postData("/api/danger", {})
+    }
+
+    const handleEnd = () => {
+        // postData("/api/end", {})
+    }
 
     return <div>
         <AppNavbar/>

@@ -6,7 +6,7 @@ import {goingOutAtom} from "../atoms";
 
 import {useRecoilState} from "recoil";
 import SimpleMap from "../components/Map";
-import AppNavbar from "../components/WalkerSetup/AppNavbar";
+import AppNavbar from "../components/AppNavbar";
 
 function WalkerSetupScreen() {
     return <div className="">
