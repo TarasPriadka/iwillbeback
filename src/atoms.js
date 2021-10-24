@@ -18,3 +18,8 @@ export const sessionIdAtom = atom({
     key: "sessionId",
     default: ""
 })
+
+export const socketAtom = atom({
+    key: "socket",
+    default: ""
+})
