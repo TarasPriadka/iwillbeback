@@ -11,16 +11,29 @@ import {useRecoilState} from "recoil";
 function App() {
 
     const [goingOut, setGoingOut] = useRecoilState(goingOutAtom);
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
+
 
     return <div className="">
         <AppNavbar/>
-        <Button onClick={()=> {
+        <Button className="m-2" onClick={() => {
             setGoingOut(!goingOut)
         }}>{goingOut ? "Stop Going Out" : "Go out"}</Button>
-        { goingOut ?
+        {goingOut ?
             <TrusteeForm/> : <></>
         }
 
+        <div className="m-2">
+        <Button onClick={() => {
+            navigator.geolocation.getCurrentPosition((position) => {
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
+            });
+        }}>Get my geolocation</Button>
+
+        <p>Latitude {latitude}; Longitude {longitude}</p>
+        </div>
     </div>
 }
 

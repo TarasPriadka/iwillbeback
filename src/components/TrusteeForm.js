@@ -6,7 +6,7 @@ import {useRecoilState} from "recoil";
 
 function TrusteeForm() {
 
-    const [goingOut, setGoingOut] = useRecoilState(goingOutAtom);
+    const [_, setGoingOut] = useRecoilState(goingOutAtom);
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [where, setWhere] = useState("");
@@ -20,7 +20,7 @@ function TrusteeForm() {
         e.preventDefault();
     }
 
-    return <div className="trust-form m-1 p-3">
+    return <div className="trust-form m-2 p-3">
         <Form onSubmit={handleSubmit}>
             <Form.Group controlId="name">
                 <Form.Text>Trustee Info:</Form.Text>
