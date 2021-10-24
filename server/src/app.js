@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const { json, urlencoded } = require("body-parser");
 const cors = require("cors");
 require("express-async-errors");
@@ -25,6 +26,12 @@ app.post("/api/verify", verify);
 app.post("/api/help", help);
 app.post("/api/end", end);
 app.post("/api/trustee", trustee);
+// app.get("/trustee/*", (req, res) => {
+//   res.sendFile(__dirname + "../../index.html");
+// });
+app.get("/trustee/:id", (req, res) => {
+  res.redirect(`/?type=trustee&id=${req.params.id}`);
+});
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
