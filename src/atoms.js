@@ -13,3 +13,8 @@ export const loggedInAtom = atom({
     key: "isUser",
     default: false
 })
+
+export const sessionIdAtom = atom({
+    key: "sessionId",
+    default: ""
+})
