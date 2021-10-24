@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import GoogleMapReact from 'google-map-react';
 import {RiMapPinUserFill} from "react-icons/all";
-import {Button} from "react-bootstrap";
 
 function SimpleMap(props) {
 
@@ -26,11 +25,12 @@ function SimpleMap(props) {
             defaultCenter={defaultProps.center}
             defaultZoom={defaultProps.zoom}
         >
-            <RiMapPinUserFill
-                lat={curLat}
-                lng={curLng}
-                size={"30px"}
-            />
+
+            {/*<RiMapPinUserFill*/}
+            {/*    lat={curLat}*/}
+            {/*    lng={curLng}*/}
+            {/*    size={"30px"}*/}
+            {/*/>*/}
 
         </GoogleMapReact>
     </div>;

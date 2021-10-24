@@ -25,16 +25,18 @@ function WalkingScreen() {
 
     return <div>
         <AppNavbar/>
-        {loggedIn ? <>
-            <SimpleMap />
-            <div className="m-2">
-                <Button variant="danger" onClick={handleDanger}>Notify Trustee</Button> {' '}
-                <Button className="float-end" variant="light" onClick={handleEnd}>End</Button>
-            </div>
-        </> : <>
-            <Login/>
-            <SimpleMap default/>
-        </>}
+        {/*{loggedIn ? <>*/}
+        {/*    <SimpleMap />*/}
+        {/*    <div className="m-2">*/}
+        {/*        <Button variant="danger" onClick={handleDanger}>Notify Trustee</Button> {' '}*/}
+        {/*        <Button className="float-end" variant="light" onClick={handleEnd}>End</Button>*/}
+        {/*    </div>*/}
+        {/*</> : <>*/}
+        {/*    <Login/>*/}
+        {/*    <SimpleMap default/>*/}
+        {/*</>}*/}
+
+        <SimpleMap default/>
 
     </div>;
 }
