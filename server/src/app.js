@@ -5,7 +5,7 @@ require("express-async-errors");
 
 const app = express();
 const middleware = require("./utils/middleware");
-const { start, verify } = require("./routes/api");
+const { start, verify, end, help } = require("./routes/api");
 
 app.disable("x-powered-by");
 app.use(cors());
@@ -22,6 +22,8 @@ app.use(middleware.requestLogger);
 app.use(express.static("build"));
 app.post("/api/start", start);
 app.post("/api/verify", verify);
+app.post("/api/help", help);
+app.post("/api/end", end);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

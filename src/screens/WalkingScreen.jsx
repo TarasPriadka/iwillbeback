@@ -16,11 +16,11 @@ function WalkingScreen() {
     const sessionId = useRecoilValue(sessionIdAtom);
 
     const handleDanger = () => {
-        // postData("/api/danger", {})
+        postData("/api/help", {'sessionid': loggedIn.sessionid})
     }
 
     const handleEnd = () => {
-        // postData("/api/end", {})
+        postData("/api/end", {'sessionid': loggedIn.sessionid})
     }
 
     return <div>
