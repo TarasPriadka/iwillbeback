@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "../../App.css";
 import {Button, Form} from "react-bootstrap";
-import {goingOutAtom, loggedInAtom, socketAtom} from "../../atoms";
+import {goingOutAtom, loggedInAtom, socketAtom, sessionIdAtom} from "../../atoms";
 import {postData} from "../../utils";
 
 import {useRecoilState, useSetRecoilState} from "recoil";
