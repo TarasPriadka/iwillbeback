@@ -41,7 +41,7 @@ function send_help_message(trustee_phone, walker_name, url) {
 function send_end_message(trustee_phone, walker_name) {
   send_message(
     trustee_phone,
-    `I'll Be Back Alert: ${walker_name} may be in trouble.`
+    `I'll Be Back Alert: ${walker_name} arrived safely.`
   );
 }
 

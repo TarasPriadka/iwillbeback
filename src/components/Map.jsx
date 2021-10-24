@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import GoogleMapReact from 'google-map-react';
 import {socketAtom, prevLocationsAtom, sessionIdAtom} from "../atoms";
 import {BsDot, RiMapPinUserFill} from "react-icons/all";
+import {Button} from "react-bootstrap";
 
 import {useRecoilState, useRecoilValue} from "recoil";
 
@@ -38,24 +39,26 @@ function SimpleMap(props) {
 
     console.log(`socket: ${socket}`);
 
-    useEffect(()=>{
-        setPrevLocations([
-            {
-                lat: curLat+0.01,
-                lng: curLng+0.01
-            },
-            ...prevLocations
-        ]);
-    },[curLat, curLng])
+    // useEffect(()=>{
+    //     setPrevLocations([
+    //         {
+    //             lat: curLat+0.01,
+    //             lng: curLng+0.01
+    //         },
+    //         ...prevLocations
+    //     ]);
+    // },[curLat, curLng])
 
-    // if (socket) {
-    if (true){
-        const interval = setInterval(async function() {
-            console.log(curLat, curLng)
-            await updateLocation(setCurLat, setCurLng)
-            console.log(curLat, curLng)
-            console.log()
-            // socket.emit("update location", {"newLat" : curLat, "newLng" : curLng})
+    const sessionid = useRecoilValue(sessionIdAtom)
+    console.log(`socket: ${socket}`)
+
+
+    if (socket) {
+        const interval = setInterval(function() {
+            console.log(curLat)
+            console.log(curLng)
+            updateLocation(curLat, curLng)
+            socket.emit("update location", {"sessionid": sessionid,"newLat" : curLat, "newLng" : curLng})
         }, 5000);
     }
 

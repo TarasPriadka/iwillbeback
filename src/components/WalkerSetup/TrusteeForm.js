@@ -11,6 +11,7 @@ import { io } from 'socket.io-client';
 function TrusteeForm() {
     const setSessionId = useSetRecoilState(sessionIdAtom);
     const setSocket = useSetRecoilState(socketAtom)
+  const setLoggedIn = useSetRecoilState(loggedInAtom)
 
     const [trusteeName, setTrusteeName] = useState("");
     const [trusteePhone, setTrusteePhone] = useState("");
@@ -33,24 +34,32 @@ function TrusteeForm() {
             }
         });
 
-        let resp = {
-            sessionId: "test"
-        }
+        // let resp = {
+        //     sessionId: "test"
+        // }
 
-        resp = await postData("/api/start", {
+        let resp = await postData("/api/start", {
             trusteeName: trusteeName,
             trusteePhone: trusteePhone,
             name: name,
-            where: where,
+            // where: where,
             when: parseInt(when),
             message: message,
+            loc: where,
+            startLoc: where
         });
 
-        setSessionId(resp.sessionId);
+        console.log(resp.sessionid)
+        setSessionId(resp.sessionid);
+        setLoggedIn(true);
         console.log("updating socket")
         const socket = io()
+        socket.on('disconnect', () => {
+          console.log(`removing ${resp.sessionid}`)
+          socket.emit('remove', {"sessionid":resp.sessionid})
+        })
         setSocket(socket);
-        history.push(`/walking/${resp.sessionId}`);
+        history.push(`/walking/${resp.sessionid}`);
     }
 
     return <div className="trust-form m-2 p-3">
