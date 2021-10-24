@@ -23,6 +23,14 @@ export const socketAtom = atom({
     default: ""
 })
 
+export const curLocAtom = atom({
+    key: "curLoc",
+    default: {
+        lat: 37.88,
+        lng: -122.2672373
+    }
+})
+
 export const prevLocationsAtom = atom({
     key: "prevLocationsAtom",
     default: [{

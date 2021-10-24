@@ -23,10 +23,11 @@ function TrusteeMap(props) {
     let [curLng, setCurLng] = useState(null);
 
     useEffect(() => {
+        console.log(props.loc)
         if (props.loc == null){
             setCurLat(null);
             setCurLng(null);
-        }else{
+        } else {
         setCurLat(props.loc.lat);
         setCurLng(props.loc.lng);}
     }, []);
