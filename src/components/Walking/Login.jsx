@@ -2,14 +2,32 @@ import React, {useState} from "react";
 import "../../App.css";
 import {Button, Form} from "react-bootstrap";
 import {useHistory} from 'react-router-dom';
+import {postData} from "../../utils";
+import {useSetRecoilState, useRecoilValue} from "recoil";
+import {loggedInAtom, sessionIdAtom} from "../../atoms";
 
 function Login() {
     const history = useHistory();
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
 
-    const handleSubmit = async () => {
+    const setLoggedIn = useSetRecoilState(loggedInAtom);
+    const sessionId = useRecoilValue(sessionIdAtom);
 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let response = postData("api/verify", {
+            trusteeName: name,
+            trusteePhone: phone,
+            sessionId: sessionId
+        });
+
+        if (response.valid) {
+            setLoggedIn(true);
+        } else {
+            window.location.href = "/";
+        }
     }
 
     return <div className="trust-form m-2 p-3">

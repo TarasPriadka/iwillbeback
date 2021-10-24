@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 function TrusteeForm() {
 
     const setGoingOut = useSetRecoilState(goingOutAtom);
-    const setIsUser = useSetRecoilState(loggedInAtom);
+    const setLoggedIn = useSetRecoilState(loggedInAtom);
 
     const [trusteeName, setTrusteeName] = useState("");
     const [trusteePhone, setTrusteePhone] = useState("");
@@ -32,7 +32,7 @@ function TrusteeForm() {
             message: message,
         });
 
-        setIsUser(true);
+        setLoggedIn(true);
         setGoingOut(false);
         history.push(`/walking/test`);
         // history.push(`/walking/${resp.sessionId}`);
