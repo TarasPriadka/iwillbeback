@@ -28,6 +28,8 @@ function WalkingScreen() {
 
     const handleEnd = () => {
         postData("/api/end", {'sessionid': sessionId})
+        history.push("/")
+        window.location.reload(false);
     }
 
     return <div>
