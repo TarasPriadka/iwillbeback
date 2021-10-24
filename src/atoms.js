@@ -8,3 +8,8 @@ export const goingOutAtom = atom({
     key: "goingOut",
     default: false
 })
+
+export const loggedInAtom = atom({
+    key: "isUser",
+    default: false
+})
