@@ -27,7 +27,6 @@ function TrusteeScreen() {
         {sessionId !=="" ? <></> :
             <>
             <Login/>
-            <SimpleMap/>
         </>}
         <SimpleMap />
     </div>;
