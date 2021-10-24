@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import GoogleMapReact from 'google-map-react';
-import {RiMapPinUserFill} from "react-icons/all";
-import {Button} from "react-bootstrap";
+import {socketAtom, prevLocationsAtom, sessionIdAtom} from "../atoms";
+import {BsDot, RiMapPinUserFill} from "react-icons/all";
+
 import {useRecoilValue} from "recoil";
-import { socketAtom } from "../atoms";
+
+const Marker = ({text}) => <RiMapPinUserFill size={"30px"} color={"red"}>{text}</RiMapPinUserFill>;
+const PreviousMarker = ({text}) => <BsDot size={"30px"} color={"red"}>{text}</BsDot>;
 
 function updateLocation(curLat, curLng) {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -14,19 +17,25 @@ function updateLocation(curLat, curLng) {
 
 function SimpleMap(props) {
 
+    const DEFAULT_LAT = 37.8778072;
+    const DEFAULT_LNG = -122.2672373;
+
     let defaultProps = {
         center: {
-            lat: 37.8778072,
-            lng: -122.2672373
+            lat: DEFAULT_LAT,
+            lng: DEFAULT_LNG,
         },
         zoom: 14
     };
 
-    // setCurLat(curLat + 0.001);
-    // setCurLng(curLng + 0.001);
     let [curLat, setCurLat] = useState(defaultProps.center.lat);
     let [curLng, setCurLng] = useState(defaultProps.center.lng);
+
+    let prevLocations = useRecoilValue(prevLocationsAtom);
+    let sessionId = useRecoilValue(sessionIdAtom);
+
     const socket = useRecoilValue(socketAtom)
+
     console.log(`socket: ${socket}`)
 
     if (socket) {
@@ -38,7 +47,7 @@ function SimpleMap(props) {
         }, 5000);
     }
 
-    return <div style={{height: '100vh', width: '100%'}}>
+    return <div style={{height: '93.5vh', width: '100%'}}>
 
         <GoogleMapReact
             bootstrapURLKeys={{key: process.env.REACT_APP_MAPS_API}}
@@ -46,11 +55,20 @@ function SimpleMap(props) {
             defaultZoom={defaultProps.zoom}
         >
 
-            {/*<RiMapPinUserFill*/}
-            {/*    lat={curLat}*/}
-            {/*    lng={curLng}*/}
-            {/*    size={"30px"}*/}
-            {/*/>*/}
+            <Marker
+                lat={defaultProps.center.lat}
+                lng={defaultProps.center.lng}
+                text="My Marker"
+            />
+
+            {prevLocations.map((locObj) => {
+                return <PreviousMarker lat={locObj.lat} lng={locObj.lng} text="My Marker"/>
+            })}
+
+            {sessionId !== "" ? <>
+
+            </> : <></>
+            }
 
         </GoogleMapReact>
     </div>;

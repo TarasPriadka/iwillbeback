@@ -26,13 +26,13 @@ function WalkingScreen() {
     return <div>
         {sessionId !=="" ? <>
             <SimpleMap />
-            <div className="m-2">
+            <div className="m-2 pb-2 mb-0" style={{backgroundColor: "white"}}>
                 <Button variant="danger" onClick={handleDanger}>Notify Trustee</Button> {' '}
                 <Button className="float-end" variant="light" onClick={handleEnd}>End</Button>
             </div>
         </> : <>
             <Login/>
-            <SimpleMap default/>
+            <SimpleMap/>
         </>}
     </div>;
 }

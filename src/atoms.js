@@ -18,8 +18,19 @@ export const sessionIdAtom = atom({
     key: "sessionId",
     default: ""
 })
-
 export const socketAtom = atom({
     key: "socket",
     default: ""
+})
+
+export const prevLocationsAtom = atom({
+    key: "prevLocationsAtom",
+    default: [{
+        lat: 37.88,
+        lng: -122.2672373
+    }, {
+        lat: 37.9,
+        lng: -122.2672373
+    }
+    ]
 })

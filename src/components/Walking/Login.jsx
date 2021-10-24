@@ -31,8 +31,9 @@ function Login() {
 
     return <div className="trust-form m-2 p-3">
         <Form onSubmit={handleSubmit}>
-            <h1 style={{color:"white"}}>I'll be back Trustee</h1>
+            <h1 style={{color:"white"}}>I'll be back</h1>
             <Form.Group controlId="name">
+                <Form.Text style={{size: "10px", color:"white"}}>Please validate your trustee information:</Form.Text>
                 <Form.Control className="mb-1" type="name" placeholder="Your Name:" value={name}
                               onChange={(e) => {
                                   setName(e.target.value)

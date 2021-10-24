@@ -9,7 +9,6 @@ import { useHistory } from 'react-router-dom';
 import { io } from 'socket.io-client';
 
 function TrusteeForm() {
-    const setLoggedIn = useSetRecoilState(loggedInAtom);
     const setSessionId = useSetRecoilState(sessionIdAtom);
     const setSocket = useSetRecoilState(socketAtom)
 
@@ -48,7 +47,6 @@ function TrusteeForm() {
         // });
 
         setSessionId(resp.sessionId);
-        setLoggedIn(true);
         console.log("updating socket")
         const socket = io()
         setSocket(socket);
