@@ -27,3 +27,5 @@ function send_template_message(trustee_phone, walker_name, url) {
         })
         .then((message) => console.log(message.sid));
 }
+
+module.exports = {send_message, send_template_message}
