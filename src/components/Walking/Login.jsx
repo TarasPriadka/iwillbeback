@@ -13,13 +13,15 @@ function Login() {
     const setLoggedIn = useSetRecoilState(loggedInAtom);
     const sessionId = useRecoilValue(sessionIdAtom);
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let curUrl = new URL(window.location.href);
+        let sid = curUrl.pathname.split("/")[2];
+
         let response = postData("api/verify", {
             trusteeName: name,
             trusteePhone: phone,
-            sessionId: sessionId
+            sessionId: sid
         });
 
         if (response.valid) {
