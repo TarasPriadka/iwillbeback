@@ -4,7 +4,7 @@ require('express-async-errors')
 
 const app = express()
 const middleware = require('./utils/middleware')
-const { start } = require('./routes/api')
+const { start, verify } = require('./routes/api')
 
 app.disable('x-powered-by')
 app.use(json())
@@ -14,11 +14,11 @@ app.use(middleware.requestLogger)
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
+
 // app.use('/', api)
 // app.use('/api', protect)
-// app.post('/api/start', start)
-// app.post('/api/stop', stop)
 app.post('/api/start', start)
+app.post('/api/verify', verify)
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
