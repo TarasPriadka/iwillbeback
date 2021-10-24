@@ -27,14 +27,14 @@ function send_start_message(
 ) {
   send_message(
     trustee_phone,
-    `I'll Be Back Alert: ${walker_name} is going to ${walker_action} expecting to be back by ${walker_eta}: ${url}`
+    `I'll Be Back: ${walker_name} is going out for about ${walker_eta} minutes: "${walker_action}". See more here: ${url}`
   );
 }
 
 function send_help_message(trustee_phone, walker_name, url) {
   send_message(
     trustee_phone,
-    `I'll Be Back Alert: ${walker_name} may be in trouble. Please go to this link: ${url}`
+    `I'll Be Back ALERT: ${walker_name} raised an alert. Go to: ${url}`
   );
 }
 
