@@ -7,7 +7,7 @@ with the people they trust, in case of an emergency.
 **I'll Be Back** uses NodeJS and Express for backend, and React with Recoil handle the front end. We integrated our
 application with Twilio to notify the trustees and uses Google Maps API to display the walker's current location.
 
-As a part of CalHacks 8.0, **I'll Be Back** won the best Twilio integration out of all projects.
+As a part of CalHacks 8.0, **I'll Be Back** won the most creative use of Twilio.
 
 ## How to build and run:
 
