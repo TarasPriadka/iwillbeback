@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import GoogleMapReact from 'google-map-react';
 import {socketAtom, prevLocationsAtom, sessionIdAtom} from "../atoms";
 import {BsDot, RiMapPinUserFill} from "react-icons/all";
 
-import {useRecoilValue} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 
 const Marker = ({text}) => <RiMapPinUserFill size={"30px"} color={"red"}>{text}</RiMapPinUserFill>;
 const PreviousMarker = ({text}) => <BsDot size={"30px"} color={"red"}>{text}</BsDot>;
 
-function updateLocation(curLat, curLng) {
+async function updateLocation(setCurLat, setCurLng) {
     navigator.geolocation.getCurrentPosition((position) => {
-        curLat = position.coords.latitude;
-        curLng = position.coords.longitude;
+        setCurLat(position.coords.latitude+0.01);
+        setCurLng(position.coords.longitude+0.01);
     });
 }
 
@@ -31,23 +31,35 @@ function SimpleMap(props) {
     let [curLat, setCurLat] = useState(defaultProps.center.lat);
     let [curLng, setCurLng] = useState(defaultProps.center.lng);
 
-    let prevLocations = useRecoilValue(prevLocationsAtom);
+    let [prevLocations, setPrevLocations] = useRecoilState(prevLocationsAtom);
     let sessionId = useRecoilValue(sessionIdAtom);
 
     const socket = useRecoilValue(socketAtom)
 
-    console.log(`socket: ${socket}`)
+    console.log(`socket: ${socket}`);
 
-    if (socket) {
-        const interval = setInterval(function() {
-            console.log(curLat)
-            console.log(curLng)
-            updateLocation(curLat, curLng)
-            socket.emit("update location", {"newLat" : curLat, "newLng" : curLng})
+    useEffect(()=>{
+        setPrevLocations([
+            {
+                lat: curLat+0.01,
+                lng: curLng+0.01
+            },
+            ...prevLocations
+        ]);
+    },[curLat, curLng])
+
+    // if (socket) {
+    if (true){
+        const interval = setInterval(async function() {
+            console.log(curLat, curLng)
+            await updateLocation(setCurLat, setCurLng)
+            console.log(curLat, curLng)
+            console.log()
+            // socket.emit("update location", {"newLat" : curLat, "newLng" : curLng})
         }, 5000);
     }
 
-    return <div style={{height: '93.5vh', width: '100%'}}>
+    return <div style={{height: sessionId!==""?'93.5vh':'100vh', width: '100%'}}>
 
         <GoogleMapReact
             bootstrapURLKeys={{key: process.env.REACT_APP_MAPS_API}}

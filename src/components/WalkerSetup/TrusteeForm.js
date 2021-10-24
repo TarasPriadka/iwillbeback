@@ -37,14 +37,14 @@ function TrusteeForm() {
             sessionId: "test"
         }
 
-        // resp = await postData("/api/start", {
-        //     trusteeName: trusteeName,
-        //     trusteePhone: trusteePhone,
-        //     name: name,
-        //     where: where,
-        //     when: parseInt(when),
-        //     message: message,
-        // });
+        resp = await postData("/api/start", {
+            trusteeName: trusteeName,
+            trusteePhone: trusteePhone,
+            name: name,
+            where: where,
+            when: parseInt(when),
+            message: message,
+        });
 
         setSessionId(resp.sessionId);
         console.log("updating socket")

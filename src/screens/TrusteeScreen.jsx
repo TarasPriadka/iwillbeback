@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 import "../App.css";
 
-import {useHistory, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {loggedInAtom, sessionIdAtom} from "../atoms";
 import Login from "../components/Walking/Login";
 import {useRecoilValue} from "recoil";
@@ -11,16 +11,9 @@ import AppNavbar from "../components/AppNavbar";
 import {Button, ButtonGroup} from "react-bootstrap";
 import {postData} from "../utils";
 
-function WalkingScreen() {
+function TrusteeScreen() {
     const id = useParams();
     const sessionId = useRecoilValue(sessionIdAtom);
-    const history = useHistory();
-
-    useEffect(()=>{
-        if (sessionId==="") {
-            history.push("/");
-        }
-    },[])
 
     const handleDanger = () => {
         postData("/api/help", {'sessionid': sessionId})
@@ -31,17 +24,13 @@ function WalkingScreen() {
     }
 
     return <div>
-        {sessionId !=="" ? <>
-            <SimpleMap />
-            <div className="m-2 pb-2 mb-0" style={{backgroundColor: "white"}}>
-                <Button variant="danger" onClick={handleDanger}>Notify Trustee</Button> {' '}
-                <Button className="float-end" variant="light" onClick={handleEnd}>End</Button>
-            </div>
-        </> : <>
+        {sessionId !=="" ? <></> :
+            <>
             <Login/>
             <SimpleMap/>
         </>}
+        <SimpleMap />
     </div>;
 }
 
-export default WalkingScreen;
+export default TrusteeScreen;
