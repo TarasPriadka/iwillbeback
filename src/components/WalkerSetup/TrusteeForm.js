@@ -7,8 +7,6 @@ import {postData} from "../../utils";
 import {useRecoilState, useSetRecoilState} from "recoil";
 import { useHistory } from 'react-router-dom';
 function TrusteeForm() {
-
-    const setGoingOut = useSetRecoilState(goingOutAtom);
     const setLoggedIn = useSetRecoilState(loggedInAtom);
 
     const [trusteeName, setTrusteeName] = useState("");
@@ -33,7 +31,6 @@ function TrusteeForm() {
         });
 
         setLoggedIn(true);
-        setGoingOut(false);
         history.push(`/walking/test`);
         // history.push(`/walking/${resp.sessionId}`);
 
@@ -75,7 +72,7 @@ function TrusteeForm() {
             </Form.Group>
 
             <Button variant="primary" type="submit">
-                Submit
+                Go out!
             </Button>
         </Form></div>
 }
