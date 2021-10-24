@@ -46,16 +46,16 @@ function SimpleMap() {
         ]);
     },[curLat, curLng])
 
-    // // if (socket) {
-    // if (socket){
-    //     const interval = setInterval(async function() {
-    //         console.log(curLat, curLng)
-    //         await updateLocation(setCurLat, setCurLng)
-    //         console.log(curLat, curLng)
-    //         console.log()
-    //         // socket.emit("update location", {"newLat" : curLat, "newLng" : curLng})
-    //     }, 5000);
-    // }
+    // if (socket) {
+    if (socket){
+        const interval = setInterval(async function() {
+            console.log(curLat, curLng)
+            await updateLocation(setCurLat, setCurLng)
+            console.log(curLat, curLng)
+            console.log()
+            socket.emit("update location", {"newLat" : curLat, "newLng" : curLng})
+        }, 5000);
+    }
 
     return <div style={{height: sessionId!==""?'93.5vh':'100vh', width: '100%'}}>
 
