@@ -5,7 +5,7 @@ require("express-async-errors");
 
 const app = express();
 const middleware = require("./utils/middleware");
-const { start, verify, end, help } = require("./routes/api");
+const { start, verify, end, help, trustee } = require("./routes/api");
 
 app.disable("x-powered-by");
 app.use(cors());
@@ -24,6 +24,7 @@ app.post("/api/start", start);
 app.post("/api/verify", verify);
 app.post("/api/help", help);
 app.post("/api/end", end);
+app.post("/api/trustee", trustee);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
