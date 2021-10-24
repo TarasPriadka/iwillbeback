@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "../App.css";
 import {Button, Col, Collapse, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
-import TrusteeForm from "./WalkerSetup/TrusteeForm";
+import TrusteeForm from "./TrusteeForm";
 
 
 function AppNavbar(props) {

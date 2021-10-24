@@ -20,12 +20,16 @@ io.on("connection", (socket) => {
   });
 
   socket.on("update location", (msg) => {
-    logger.info(`update location`);
-    console.log(msg);
-    const sessionid = msg.sessionid;
-    console.log(sessionid);
-    sessions[sessionid].loc.lat = msg.newLat;
-    sessions[sessionid].loc.lng = msg.newLng;
+    try {
+      logger.info(`update location`);
+      console.log(msg);
+      const sessionid = msg.sessionid;
+      console.log(sessionid);
+      sessions[sessionid].loc.lat = msg.newLat;
+      sessions[sessionid].loc.lng = msg.newLng;
+    } catch (e) {
+      console.error("BAD REQUEST ON SOCKET: ", e, msg)
+    }
   });
 
   socket.on("remove", (msg) => {

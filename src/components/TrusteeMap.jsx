@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import GoogleMapReact from 'google-map-react';
+import React from 'react';
 import {BsDot, RiMapPinUserFill} from "react-icons/all";
+import {useRecoilValue} from "recoil";
+import {curLocAtom} from "../atoms";
+import GoogleMapReact from "google-map-react";
 
-const Marker = ({text}) => <RiMapPinUserFill size={"30px"} color={"red"}>{text}</RiMapPinUserFill>;
+const Marker = ({text}) => <RiMapPinUserFill size="30px" color={"red"}/>;
 const PreviousMarker = ({text}) => <BsDot size={"30px"} color={"red"}>{text}</BsDot>;
-
 
 function TrusteeMap(props) {
 
@@ -19,37 +20,26 @@ function TrusteeMap(props) {
         zoom: 14
     };
 
-    let [curLat, setCurLat] = useState(null);
-    let [curLng, setCurLng] = useState(null);
-
-    useEffect(() => {
-        console.log(props.loc)
-        if (props.loc == null){
-            setCurLat(null);
-            setCurLng(null);
-        } else {
-        setCurLat(props.loc.lat);
-        setCurLng(props.loc.lng);}
-    }, []);
+    let curLoc = useRecoilValue(curLocAtom);
 
     return <div style={{height: '100vh', width: '100%'}}>
-
-        <GoogleMapReact
-            bootstrapURLKeys={{key: process.env.REACT_APP_MAPS_API}}
-            defaultCenter={defaultProps.center}
-            defaultZoom={defaultProps.zoom}
-        >
-            {curLng != null && curLat ?
+        {curLoc != null ?
+            < GoogleMapReact
+                bootstrapURLKeys={{key: process.env.REACT_APP_MAPS_API}}
+                defaultCenter={defaultProps.center}
+                defaultZoom={defaultProps.zoom}
+            >
                 <Marker
-                    lat={curLat}
-                    lng={curLng}
-                    text="My Marker"
-                /> : <></>
-            }
-
-
-
-        </GoogleMapReact>
+                    lat={curLoc.lat}
+                    lng={curLoc.lng}
+                    text={""}
+                />
+            </GoogleMapReact> : < GoogleMapReact
+                bootstrapURLKeys={{key: process.env.REACT_APP_MAPS_API}}
+                defaultCenter={defaultProps.center}
+                defaultZoom={defaultProps.zoom}
+            />
+        }
     </div>;
 
 }

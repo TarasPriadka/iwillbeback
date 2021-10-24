@@ -1,22 +1,21 @@
 import React, {useState} from "react";
-import "../../App.css";
-import {goingOutAtom, loggedInAtom, socketAtom, sessionIdAtom} from "../../atoms";
-import {Button, Form, Dropdown} from "react-bootstrap";
-import {postData} from "../../utils";
+import "../App.css";
+import {loggedInAtom, sessionIdAtom, socketAtom} from "../atoms";
+import {Button, Form} from "react-bootstrap";
+import {postData} from "../utils";
 
-import {useRecoilState, useSetRecoilState} from "recoil";
-import { useHistory } from 'react-router-dom';
-import { io } from 'socket.io-client';
+import {useSetRecoilState} from "recoil";
+import {useHistory} from 'react-router-dom';
+import {io} from 'socket.io-client';
 
 function TrusteeForm() {
     const setSessionId = useSetRecoilState(sessionIdAtom);
     const setSocket = useSetRecoilState(socketAtom)
-  const setLoggedIn = useSetRecoilState(loggedInAtom)
+    const setLoggedIn = useSetRecoilState(loggedInAtom)
 
     const [trusteeName, setTrusteeName] = useState("");
     const [trusteePhone, setTrusteePhone] = useState("");
     const [name, setName] = useState("");
-    // const [where, setWhere] = useState("");
     const [when, setWhen] = useState("");
     const [message, setMessage] = useState("");
 
@@ -33,10 +32,6 @@ function TrusteeForm() {
                 lng: position.coords.longitude
             }
         });
-
-        // let resp = {
-        //     sessionId: "test"
-        // }
 
         let resp = await postData("/api/start", {
             trusteeName: trusteeName,
@@ -55,8 +50,8 @@ function TrusteeForm() {
         console.log("updating socket")
         const socket = io()
         socket.on('disconnect', () => {
-          console.log(`removing ${resp.sessionid}`)
-          socket.emit('remove', {"sessionid":resp.sessionid})
+            console.log(`removing ${resp.sessionid}`)
+            socket.emit('remove', {"sessionid": resp.sessionid})
         })
         setSocket(socket);
         history.push(`/walking/${resp.sessionid}`);
@@ -66,7 +61,7 @@ function TrusteeForm() {
         <h1>I Will Be Back</h1>
         <Form onSubmit={handleSubmit}>
             <Form.Group controlId="name">
-                <Form.Label style={{color:"white"}}>Trustee Info:</Form.Label>
+                <Form.Label style={{color: "white"}}>Trustee Info:</Form.Label>
                 <Form.Control className="mb-1" type="name" placeholder="Trustee Name:" value={trusteeName}
                               onChange={(e) => {
                                   setTrusteeName(e.target.value)
@@ -75,7 +70,7 @@ function TrusteeForm() {
                               onChange={(e) => {
                                   setTrusteePhone(e.target.value)
                               }}/>
-                <Form.Label style={{color:"white"}}>My info:</Form.Label>
+                <Form.Label style={{color: "white"}}>My info:</Form.Label>
                 <Form.Control className="mb-1" type="phone" placeholder="Your Name:"
                               value={name}
                               onChange={(e) => {
@@ -92,7 +87,8 @@ function TrusteeForm() {
                               onChange={(e) => {
                                   setMessage(e.target.value)
                               }}/>
-                <Form.Label className="float-start">Note: You will be sharing your location with your trustee.</Form.Label>
+                <Form.Label className="float-start">Note: You will be sharing your location with your
+                    trustee.</Form.Label>
             </Form.Group>
 
             <Button className="float-end" variant="success" type="submit">

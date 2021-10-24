@@ -26,12 +26,17 @@ app.post("/api/verify", verify);
 app.post("/api/help", help);
 app.post("/api/end", end);
 app.post("/api/trustee", trustee);
-// app.get("/trustee/*", (req, res) => {
-//   res.sendFile(__dirname + "../../index.html");
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../../build/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+// app.get("/trustee/:id", (req, res) => {
+//   res.redirect(`/?type=trustee&id=${req.params.id}`);
 // });
-app.get("/trustee/:id", (req, res) => {
-  res.redirect(`/?type=trustee&id=${req.params.id}`);
-});
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

@@ -1,10 +1,9 @@
 import React, {useState} from "react";
-import "../../App.css";
+import "../App.css";
 import {Button, Form} from "react-bootstrap";
-import {useHistory} from 'react-router-dom';
-import {postData} from "../../utils";
-import {useSetRecoilState, useRecoilValue} from "recoil";
-import {loggedInAtom, sessionIdAtom} from "../../atoms";
+import {postData} from "../utils";
+import {useRecoilValue} from "recoil";
+import {sessionIdAtom} from "../atoms";
 
 function Login(props) {
     const [name, setName] = useState("");
@@ -35,9 +34,9 @@ function Login(props) {
 
     return <div className="trust-form m-2 p-3">
         <Form onSubmit={handleSubmit}>
-            <h1 style={{color:"white"}}>I'll be back</h1>
+            <h1 style={{color: "white"}}>I'll be back</h1>
             <Form.Group controlId="name">
-                <Form.Text style={{size: "10px", color:"white"}}>Please validate your trustee information:</Form.Text>
+                <Form.Text style={{size: "10px", color: "white"}}>Please validate your trustee information:</Form.Text>
                 <Form.Control className="mb-1" type="name" placeholder="Your Name:" value={name}
                               onChange={(e) => {
                                   setName(e.target.value)

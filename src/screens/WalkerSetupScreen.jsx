@@ -1,20 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 
 import "../App.css";
-import TrusteeForm from "../components/WalkerSetup/TrusteeForm";
-import {goingOutAtom} from "../atoms";
-
-import {useRecoilState} from "recoil";
-import SimpleMap from "../components/Map";
-import AppNavbar from "../components/AppNavbar";
+import TrusteeForm from "../components/TrusteeForm";
 
 function WalkerSetupScreen() {
     return <>
         <div className="main"/>
         <div>
-        {/*<AppNavbar/>*/}
-        <TrusteeForm/>
-    </div></>
+            <TrusteeForm/>
+        </div>
+    </>
 }
 
 export default WalkerSetupScreen;

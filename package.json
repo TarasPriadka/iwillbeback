@@ -21,8 +21,10 @@
     "twilio": "^3.70.0"
   },
   "scripts": {
+    "setup": "npm i && cd server && npm i",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf build &&  react-scripts build --prod",
+    "server": "node server/src/index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
