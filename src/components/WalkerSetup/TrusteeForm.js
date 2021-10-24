@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "../../App.css";
 import {Button, Form, Dropdown} from "react-bootstrap";
-import {goingOutAtom, loggedInAtom} from "../../atoms";
+import {goingOutAtom, loggedInAtom, sessionIdAtom} from "../../atoms";
 import {postData} from "../../utils";
 
 import {useRecoilState, useSetRecoilState} from "recoil";
@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 
 function TrusteeForm() {
     const setLoggedIn = useSetRecoilState(loggedInAtom);
+    const setSessionId = useSetRecoilState(sessionIdAtom);
 
     const [trusteeName, setTrusteeName] = useState("");
     const [trusteePhone, setTrusteePhone] = useState("");
@@ -17,12 +18,6 @@ function TrusteeForm() {
     // const [where, setWhere] = useState("");
     const [when, setWhen] = useState("");
     const [message, setMessage] = useState("");
-
-    const currentHours = `${new Date().getHours().toString()}:00`;
-    console.log(currentHours); // => 9
-    // currentTime.getMinutes(); // =>  30
-    // currentTime.getSeconds(); // => 51
-
 
     const history = useHistory();
 
@@ -38,18 +33,21 @@ function TrusteeForm() {
             }
         });
 
-        let resp = await postData("/api/start", {
-            trusteeName: trusteeName,
-            trusteePhone: trusteePhone,
-            name: name,
-            where: where,
-            when: when,
-            message: message,
-        });
+        let resp = {
+            sessionId: "test"
+        }
 
-        setLoggedIn(true);
-        history.push(`/walking/test`);
-        // history.push(`/walking/${resp.sessionId}`);
+        // resp = await postData("/api/start", {
+        //     trusteeName: trusteeName,
+        //     trusteePhone: trusteePhone,
+        //     name: name,
+        //     where: where,
+        //     when: parseInt(when),
+        //     message: message,
+        // });
+
+        setSessionId(resp.sessionId);
+        history.push(`/walking/${resp.sessionId}`);
 
     }
 
@@ -72,26 +70,21 @@ function TrusteeForm() {
                               onChange={(e) => {
                                   setName(e.target.value)
                               }}/>
-                <Form.Text className="float-start" style={{color:"white"}}>How long are you going to be out:</Form.Text>
-                <Dropdown>
-                    <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                        Duration:
-                    </Dropdown.Toggle>
+                <Form.Control className="mb-1" type="phone" placeholder="How long will you be out in minutes?"
+                              value={when}
+                              onChange={(e) => {
+                                  setWhen(e.target.value)
+                              }}/>
 
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
                 <Form.Control as="textarea" rows={3} className="mb-1" type="phone" placeholder="Short Note:"
                               value={message}
                               onChange={(e) => {
                                   setMessage(e.target.value)
                               }}/>
+                <Form.Label className="float-start">Note: You will be sharing your location with your trustee.</Form.Label>
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button className="float-end" variant="success" type="submit">
                 Go out!
             </Button>
         </Form></div>

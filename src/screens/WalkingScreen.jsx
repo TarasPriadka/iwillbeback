@@ -3,7 +3,7 @@ import React from "react";
 import "../App.css";
 
 import {useParams} from "react-router-dom";
-import {loggedInAtom} from "../atoms";
+import {loggedInAtom, sessionIdAtom} from "../atoms";
 import Login from "../components/Walking/Login";
 import {useRecoilValue} from "recoil";
 import SimpleMap from "../components/Map";
@@ -13,7 +13,7 @@ import {postData} from "../utils";
 
 function WalkingScreen() {
     const id = useParams();
-    const loggedIn = useRecoilValue(loggedInAtom);
+    const sessionId = useRecoilValue(sessionIdAtom);
 
     const handleDanger = () => {
         // postData("/api/danger", {})
@@ -24,20 +24,16 @@ function WalkingScreen() {
     }
 
     return <div>
-        <AppNavbar/>
-        {/*{loggedIn ? <>*/}
-        {/*    <SimpleMap />*/}
-        {/*    <div className="m-2">*/}
-        {/*        <Button variant="danger" onClick={handleDanger}>Notify Trustee</Button> {' '}*/}
-        {/*        <Button className="float-end" variant="light" onClick={handleEnd}>End</Button>*/}
-        {/*    </div>*/}
-        {/*</> : <>*/}
-        {/*    <Login/>*/}
-        {/*    <SimpleMap default/>*/}
-        {/*</>}*/}
-
-        <SimpleMap default/>
-
+        {sessionId !=="" ? <>
+            <SimpleMap />
+            <div className="m-2">
+                <Button variant="danger" onClick={handleDanger}>Notify Trustee</Button> {' '}
+                <Button className="float-end" variant="light" onClick={handleEnd}>End</Button>
+            </div>
+        </> : <>
+            <Login/>
+            <SimpleMap default/>
+        </>}
     </div>;
 }
 

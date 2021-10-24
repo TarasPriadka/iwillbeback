@@ -7,7 +7,6 @@ import {useSetRecoilState, useRecoilValue} from "recoil";
 import {loggedInAtom, sessionIdAtom} from "../../atoms";
 
 function Login() {
-    const history = useHistory();
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
 
@@ -32,8 +31,8 @@ function Login() {
 
     return <div className="trust-form m-2 p-3">
         <Form onSubmit={handleSubmit}>
+            <h1 style={{color:"white"}}>I'll be back Trustee</h1>
             <Form.Group controlId="name">
-                <Form.Text>Trustee Info:</Form.Text>
                 <Form.Control className="mb-1" type="name" placeholder="Your Name:" value={name}
                               onChange={(e) => {
                                   setName(e.target.value)
